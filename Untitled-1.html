@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INST377 - Lab 4</title>
+    <style>
+        body {
+            background: #add8e6;
+            font-family: Verdana, sans-serif;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .section {
+            border: 3px solid white;
+            border-radius: 12px;
+            padding: 15px;
+            width: 300px;
+            background: #6a0dad;
+            color: white;
+            position: absolute;
+        }
+        .top-left { top: 30%; left: 20%; }
+        .top-right { top: 30%; right: 20%; }
+        .bottom-left { bottom: 30%; left: 20%; }
+        .bottom-right { bottom: 30%; right: 20%; }
+        input { padding: 5px; }
+        button {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 5px;
+            background: #ffcc00;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover { background: #ffaa00; }
+    </style>
+</head>
+<body>
+    <h1 id="page-heading">INST377 - Lab 4</h1>
+
+    <div class="section top-left">
+        <form id="formAlert">
+            <label for="inputName">Enter Name:</label>
+            <input type="text" id="inputName" name="inputName" required>
+            <button type="submit">Alert Me!</button>
+        </form>
+    </div>
+
+    <div class="section top-right">
+        <button onclick="toggleBackgroundColor()">Change Color</button>
+    </div>
+
+    <div class="section bottom-left">
+        <form id="formValidate">
+            <label for="inputText">Text Tester:</label>
+            <input type="text" id="inputText" name="inputText" required>
+            <button type="submit">Validate Text</button>
+        </form>
+    </div>
+
+    <div class="section bottom-right">
+        <button onclick="appendToHeading()">Add Text</button>
+    </div>
+
+    <script>
+        document.getElementById('formAlert').onsubmit = function(event) {
+            event.preventDefault();
+            const name = document.getElementById('inputName').value.trim();
+            alert(`Hi ${name}!`);
+        };
+
+        function toggleBackgroundColor() {
+            document.body.style.background =
+                document.body.style.background === 'rgb(173, 216, 230)' ? '#90ee90' : '#add8e6';
+        }
+
+        document.getElementById('formValidate').onsubmit = function(event) {
+            event.preventDefault();
+            const validationPattern = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+            const text = document.getElementById('inputText').value;
+            alert(validationPattern.test(text) ? 'Text contains special characters!' : 'Very Valid Text :3');
+        };
+
+        function appendToHeading() {
+            const heading = document.getElementById('page-heading');
+            if (!heading.textContent.includes('Add Text')) {
+                heading.textContent += ' Add Text';
+            }
+        }
+    </script>
+</body>
+</html>
